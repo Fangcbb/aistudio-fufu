@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project or category",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "order": { "type": "number" },
+        "type": { "enum": ["portfolio", "classification"] }
+      },
+      "required": ["title", "order", "type"]
+    },
+    "GalleryImage": {
+      "title": "Gallery Image",
+      "description": "A photograph in the gallery",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "url": { "type": "string" },
+        "projectId": { "type": "string" },
+        "order": { "type": "number" },
+        "featured": { "type": "boolean" }
+      },
+      "required": ["title", "url", "order"]
+    },
+    "PageContent": {
+      "title": "Page Content",
+      "description": "Static content for pages",
+      "type": "object",
+      "properties": {
+        "key": { "type": "string" },
+        "data": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Collection of projects and classifications"
+    },
+    "/gallery/{imageId}": {
+      "schema": "GalleryImage",
+      "description": "All photographs"
+    },
+    "/site_content/{contentId}": {
+      "schema": "PageContent",
+      "description": "Global site text contents"
+    }
+  }
+}
